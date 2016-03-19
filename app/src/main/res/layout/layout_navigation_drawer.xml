@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F2F2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/drawer_user_panel"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#279cef"
+            android:orientation="vertical">
+
+            <xyz.imyeo.learnc.widget.CircleImageView
+                android:id="@+id/drawer_user_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="24dp" />
+
+            <TextView
+                android:id="@+id/drawer_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="18dp"
+                android:singleLine="true"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/drawer_menu_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_home"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/drawer_menu_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_tutorial"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/drawer_menu_forum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_forum"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/drawer_menu_self_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_self_test"
+            android:textSize="22sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c1c2c2" />
+
+        <TextView
+            android:id="@+id/drawer_menu_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_setting"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/drawer_menu_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawer_menu_item_bg"
+            android:gravity="center_vertical"
+            android:minHeight="65dp"
+            android:padding="18dp"
+            android:text="@string/drawer_about"
+            android:textSize="22sp" />
+    </LinearLayout>
+</ScrollView>

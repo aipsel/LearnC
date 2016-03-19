@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LearnC</string>
+
+    <string name="drawer_home">首页</string>
+    <string name="drawer_tutorial">在线教程</string>
+    <string name="drawer_forum">淘知论坛</string>
+    <string name="drawer_self_test">自我评测</string>
+    <string name="drawer_setting">设置</string>
+    <string name="drawer_about">关于</string>
 </resources>
