@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import xyz.imyeo.learnc.fragment.AbsFragment;
+import xyz.imyeo.learnc.fragment.HomeFragment;
 import xyz.imyeo.learnc.widget.CircleImageView;
 
 public class MainActivity extends Activity implements View.OnClickListener,
@@ -31,6 +32,9 @@ public class MainActivity extends Activity implements View.OnClickListener,
         mFragmentManager = getFragmentManager();
 
         initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
+
+        AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
+                HomeFragment.TAG, null);
     }
 
     @Override
@@ -40,6 +44,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
             case R.id.drawer_user_panel:
                 break;
             case R.id.drawer_menu_home:
+                AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
+                        HomeFragment.TAG, null);
                 break;
             case R.id.drawer_menu_tutorial:
                 break;
