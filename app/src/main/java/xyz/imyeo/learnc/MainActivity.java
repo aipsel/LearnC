@@ -1,8 +1,7 @@
 package xyz.imyeo.learnc;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.FragmentManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -11,11 +10,15 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import xyz.imyeo.learnc.fragment.AbsFragment;
 import xyz.imyeo.learnc.widget.CircleImageView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener,
+        AbsFragment.AbsFragmentListener {
 
     private static final String TAG = "MainActivity";
+
+    private FragmentManager mFragmentManager;
 
     private DrawerLayout mNavigationDrawer;
 
@@ -25,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mFragmentManager = getFragmentManager();
 
         initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
     }
@@ -83,9 +87,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         drawerMenu.findViewById(R.id.drawer_menu_about).setOnClickListener(this);
     }
 
-    private void changePage(Fragment fragment, String tag) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.home_content, fragment, tag);
-        transaction.commit();
+    @Override
+    public void onChangeFragment(AbsFragment fragment, int flag) {
+        mFragmentManager.beginTransaction()
+                .add(fragment.getContainerId(), fragment, fragment.getFragmentTag())
+                .commit();
     }
 }
