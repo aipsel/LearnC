@@ -10,6 +10,8 @@ import java.util.Map;
 
 public abstract class AbsFragment extends Fragment {
 
+    public static final int FLAG_SINGLETON = 0x0001;
+
     private static Map<Class<? extends AbsFragment>, AbsFragment> mFragments = new HashMap<>();
 
     private int mContainerViewId;
@@ -35,18 +37,29 @@ public abstract class AbsFragment extends Fragment {
     }
 
     public static void show(FragmentManager manager, Class<? extends AbsFragment> cls,
-                            int containerId, String tag, Bundle args) {
-        AbsFragment ins = mFragments.get(cls);
-        if (ins == null) {
+                            int containerId, String tag, Bundle args, int flags) {
+        AbsFragment ins;
+        if (isSet(flags, FLAG_SINGLETON)) {
+            ins = mFragments.get(cls);
+            if (ins == null) {
+                try {
+                    ins = cls.newInstance();
+                } catch (java.lang.InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
+                    ins = null;
+                }
+                mFragments.put(cls, ins);
+            }
+        } else {
             try {
                 ins = cls.newInstance();
             } catch (java.lang.InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
                 ins = null;
             }
-            mFragments.put(cls, ins);
         }
         if (ins != null) {
+            if (ins.isAdded()) return;
             ins.setArguments(args);
             ins.mContainerViewId = containerId;
             ins.mTag = tag;
@@ -73,4 +86,7 @@ public abstract class AbsFragment extends Fragment {
         return mTag;
     }
 
+    private static boolean isSet(int flags, int flag) {
+        return (flags & flag) == flag;
+    }
 }

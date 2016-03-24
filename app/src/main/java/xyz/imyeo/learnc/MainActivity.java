@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
         initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
 
         AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
-                HomeFragment.TAG, null);
+                HomeFragment.TAG, null, AbsFragment.FLAG_SINGLETON);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
                 break;
             case R.id.drawer_menu_home:
                 AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
-                        HomeFragment.TAG, null);
+                        HomeFragment.TAG, null, AbsFragment.FLAG_SINGLETON);
                 break;
             case R.id.drawer_menu_tutorial:
                 break;
