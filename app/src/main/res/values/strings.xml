@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">LearnC</string>
+    <string name="parse_app_id">AppId</string>
+    <string name="parse_server">http://server.me:1337/parse</string>
 
     <string name="drawer_home">首页</string>
     <string name="drawer_tutorial">在线教程</string>
