@@ -6,4 +6,11 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="FlowTagView">
+        <attr name="ftv_tagBackground" format="color|reference"/>
+        <attr name="ftv_tagPadding" format="dimension|reference"/>
+        <attr name="ftv_tagGap" format="dimension"/>
+        <attr name="ftv_tagTextSize" format="dimension|reference"/>
+    </declare-styleable>
 </resources>
