@@ -96,7 +96,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
     @Override
     public void onChangeFragment(AbsFragment fragment, int flag) {
         mFragmentManager.beginTransaction()
-                .add(fragment.getContainerId(), fragment, fragment.getFragmentTag())
+                .replace(fragment.getContainerId(), fragment, fragment.getFragmentTag())
                 .commit();
     }
 }

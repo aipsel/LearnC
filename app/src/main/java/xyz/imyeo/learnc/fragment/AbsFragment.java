@@ -70,12 +70,20 @@ public abstract class AbsFragment extends Fragment {
     protected void show(Class<? extends AbsFragment> cls, int containerId, String tag, Bundle args) {
         AbsFragment ins = mFragments.get(cls);
         if (ins == null) {
-            throw new RuntimeException("Fragment haven't been instantiated, try the static version");
+            try {
+                ins = cls.newInstance();
+            } catch (java.lang.InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                ins = null;
+            }
         }
-        ins.setArguments(args);
-        ins.mContainerViewId = containerId;
-        ins.mTag = tag;
-        mFragmentListener.onChangeFragment(ins, 0);
+        if (ins != null) {
+            mFragments.put(cls, ins);
+            ins.setArguments(args);
+            ins.mContainerViewId = containerId;
+            ins.mTag = tag;
+            mFragmentListener.onChangeFragment(ins, 0);
+        }
     }
 
     public int getContainerId() {
