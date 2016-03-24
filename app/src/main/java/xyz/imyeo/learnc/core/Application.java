@@ -17,6 +17,7 @@ public class Application extends android.app.Application {
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getResources().getString(R.string.parse_app_id))
                 .server(getResources().getString(R.string.parse_server))
+                .clientKey(getResources().getString(R.string.parse_client_id))
                 .build());
     }
 
