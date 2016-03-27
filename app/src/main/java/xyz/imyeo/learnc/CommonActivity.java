@@ -2,6 +2,7 @@ package xyz.imyeo.learnc;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,16 +31,22 @@ public class CommonActivity extends Activity implements AbsFragment.AbsFragmentL
             Log.d(TAG, "onCreate: no content!!");
             finish();
         } else {
+            AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
+            builder.singleton(true);
             AbsFragment.show(mFragmentManager, (Class<? extends AbsFragment>) cls,
-                    R.id.content_container, fragmentTag, null, AbsFragment.FLAG_SINGLETON);
+                    R.id.content_container, fragmentTag, null, builder.build());
         }
     }
 
     @Override
-    public void onChangeFragment(AbsFragment fragment, int flag) {
-        mFragmentManager.beginTransaction()
-                .replace(fragment.getContainerId(), fragment, fragment.getFragmentTag())
-                .addToBackStack(fragment.getFragmentTag())
-                .commit();
+    public void onChangeFragment(AbsFragment fragment, AbsFragment.Flag flag) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.animator.right_in, R.animator.left_out,
+                R.animator.left_in, R.animator.right_out);
+        transaction.replace(fragment.getContainerId(), fragment, fragment.getFragmentTag());
+        if (flag.addToStack) {
+            transaction.addToBackStack(fragment.getFragmentTag());
+        }
+        transaction.commit();
     }
 }

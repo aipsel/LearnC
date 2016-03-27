@@ -40,8 +40,10 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
         initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
 
+        AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
+        builder.singleton(true);
         AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
-                HomeFragment.TAG, null, AbsFragment.FLAG_SINGLETON);
+                HomeFragment.TAG, null, builder.build());
     }
 
     @Override
@@ -49,7 +51,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
         mNavigationDrawer.closeDrawer(GravityCompat.START);
         switch (v.getId()) {
             case R.id.drawer_user_panel:
-                if (ParseUser.getCurrentUser().isAuthenticated()) {
+                final ParseUser user = ParseUser.getCurrentUser();
+                if (user != null) {
                     // user fragment
                     Log.d(TAG, "onClick: User has logged in.");
                     ParseUser.logOutInBackground(new LogOutCallback() {
@@ -70,8 +73,10 @@ public class MainActivity extends Activity implements View.OnClickListener,
                 }
                 break;
             case R.id.drawer_menu_home:
+                AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
+                builder.singleton(true);
                 AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
-                        HomeFragment.TAG, null, AbsFragment.FLAG_SINGLETON);
+                        HomeFragment.TAG, null, builder.build());
                 break;
             case R.id.drawer_menu_tutorial:
                 break;
@@ -120,7 +125,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
     }
 
     @Override
-    public void onChangeFragment(AbsFragment fragment, int flag) {
+    public void onChangeFragment(AbsFragment fragment, AbsFragment.Flag flag) {
         mFragmentManager.beginTransaction()
                 .replace(fragment.getContainerId(), fragment, fragment.getFragmentTag())
                 .commit();

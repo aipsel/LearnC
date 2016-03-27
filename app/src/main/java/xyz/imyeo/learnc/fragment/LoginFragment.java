@@ -38,7 +38,8 @@ public class LoginFragment extends AbsFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_button_signup:
-                show(SignUpFragment.class, getContainerId(), getFragmentTag(), null);
+                Flag.Builder builder = new Flag.Builder().singleton(false).addToStack(true);
+                show(SignUpFragment.class, getContainerId(), getFragmentTag(), null, builder.build());
                 break;
             case R.id.login_button_signin:
                 String phone = mPhoneEditText.getText().toString().trim();
