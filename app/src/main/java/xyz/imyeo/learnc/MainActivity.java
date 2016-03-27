@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -38,6 +39,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mFragmentManager = getFragmentManager();
 
+        Toolbar toolBar = (Toolbar) findViewById(R.id.my_toolbar);
+        setActionBar(toolBar);
         initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
 
         AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
