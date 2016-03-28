@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -31,6 +32,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
     private DrawerLayout mNavigationDrawer;
 
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +42,24 @@ public class MainActivity extends Activity implements View.OnClickListener,
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mFragmentManager = getFragmentManager();
 
-        Toolbar toolBar = (Toolbar) findViewById(R.id.my_toolbar);
-        setActionBar(toolBar);
-        initDrawer(getResources().getDrawable(R.drawable.user_icon), "Yeo Yang");
+        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setActionBar(mToolbar);
+        initDrawer(getResources().getDrawable(R.drawable.user_icon, getTheme()), "Yeo Yang");
 
         AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
         builder.singleton(true);
         AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
                 HomeFragment.TAG, null, builder.build());
+        mToolbar.setTitle(R.string.drawer_home);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            mNavigationDrawer.openDrawer(GravityCompat.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
