@@ -4,6 +4,7 @@
     <string name="parse_server">http://server.me:1337/parse</string>
     <string name="parse_client_id">ClientId</string>
 
+    <string name="drawer_user">我的</string>
     <string name="drawer_home">首页</string>
     <string name="drawer_tutorial">在线教程</string>
     <string name="drawer_forum">淘知论坛</string>

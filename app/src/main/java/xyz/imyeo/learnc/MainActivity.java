@@ -7,20 +7,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.parse.LogOutCallback;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import xyz.imyeo.learnc.fragment.AbsFragment;
 import xyz.imyeo.learnc.fragment.HomeFragment;
 import xyz.imyeo.learnc.fragment.LoginFragment;
+import xyz.imyeo.learnc.fragment.UserFragment;
 import xyz.imyeo.learnc.widget.CircleImageView;
 
 public class MainActivity extends Activity implements View.OnClickListener,
@@ -69,18 +67,11 @@ public class MainActivity extends Activity implements View.OnClickListener,
             case R.id.drawer_user_panel:
                 final ParseUser user = ParseUser.getCurrentUser();
                 if (user != null) {
-                    // user fragment
-                    Log.d(TAG, "onClick: User has logged in.");
-                    ParseUser.logOutInBackground(new LogOutCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null) {
-                                Log.d(TAG, "onClick: logout error.", e);
-                            } else {
-                                Log.d(TAG, "onClick: logout.");
-                            }
-                        }
-                    });
+                    mToolbar.setTitle(R.string.drawer_user);
+                    AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
+                    builder.singleton(true);
+                    AbsFragment.show(mFragmentManager, UserFragment.class, R.id.home_content,
+                            UserFragment.TAG, null, builder.build());
                 } else {
                     Intent intent = new Intent(this, CommonActivity.class);
                     intent.putExtra(CommonActivity.EXTRA_CLASS, LoginFragment.class);
@@ -90,6 +81,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
                 }
                 break;
             case R.id.drawer_menu_home:
+                mToolbar.setTitle(R.string.drawer_home);
                 AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
                 builder.singleton(true);
                 AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
