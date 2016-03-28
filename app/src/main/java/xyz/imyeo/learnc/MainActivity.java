@@ -85,6 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
                     Intent intent = new Intent(this, CommonActivity.class);
                     intent.putExtra(CommonActivity.EXTRA_CLASS, LoginFragment.class);
                     intent.putExtra(CommonActivity.EXTRA_TAG, LoginFragment.TAG);
+                    intent.putExtra(CommonActivity.EXTRA_TITLE, LoginFragment.TITLE);
                     startActivity(intent);
                 }
                 break;

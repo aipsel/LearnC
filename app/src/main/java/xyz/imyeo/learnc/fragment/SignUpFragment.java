@@ -25,12 +25,18 @@ import xyz.imyeo.learnc.R;
 public class SignUpFragment extends AbsFragment implements View.OnClickListener {
 
     public static final String TAG = "Fragment.Signup";
+    public static final String TITLE = "注册";
 
     private EditText phoneEdit, captchaEdit, passwdEdit, passwdEdit2;
 
     private Button getCaptchaButton;
 
     private CountDownTimer mCountDownTimer;
+
+    @Override
+    public String getTitle() {
+        return TITLE;
+    }
 
     @Nullable
     @Override

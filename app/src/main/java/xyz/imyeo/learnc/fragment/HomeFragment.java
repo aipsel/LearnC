@@ -17,6 +17,11 @@ public class HomeFragment extends AbsFragment{
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public String getTitle() {
+        return getResources().getString(R.string.drawer_home);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

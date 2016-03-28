@@ -98,6 +98,8 @@ public abstract class AbsFragment extends Fragment {
         }
     }
 
+    public abstract String getTitle();
+
     public int getContainerId() {
         return mContainerViewId;
     }

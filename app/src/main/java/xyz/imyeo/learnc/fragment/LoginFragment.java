@@ -18,6 +18,7 @@ import xyz.imyeo.learnc.R;
 public class LoginFragment extends AbsFragment implements View.OnClickListener {
 
     public static final String TAG = "Fragment.Login";
+    public static final String TITLE = "登录";
 
     private EditText mPhoneEditText;
 
@@ -32,6 +33,11 @@ public class LoginFragment extends AbsFragment implements View.OnClickListener {
         view.findViewById(R.id.login_button_signup).setOnClickListener(this);
         view.findViewById(R.id.login_button_signin).setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public String getTitle() {
+        return TITLE;
     }
 
     @Override
