@@ -20,6 +20,7 @@ public class CommonActivity extends Activity implements AbsFragment.AbsFragmentL
     public static final String EXTRA_CLASS = "ExtraClass";
     public static final String EXTRA_TITLE = "ExtraTitle";
     public static final String EXTRA_TAG = "ExtraTag";
+    public static final String EXTRA_ARG = "ExtraArgument";
 
     private FragmentManager mFragmentManager;
 
@@ -37,6 +38,7 @@ public class CommonActivity extends Activity implements AbsFragment.AbsFragmentL
         Serializable cls = intent.getSerializableExtra(EXTRA_CLASS);
         String fragmentTag = intent.getStringExtra(EXTRA_TAG);
         String title = intent.getStringExtra(EXTRA_TITLE);
+        Bundle argument = intent.getBundleExtra(EXTRA_ARG);
         mToolbar.setTitle(title);
         if (cls == null || !(cls instanceof Class)) {
             Log.d(TAG, "onCreate: no content!!");
@@ -45,7 +47,7 @@ public class CommonActivity extends Activity implements AbsFragment.AbsFragmentL
             AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
             builder.singleton(true);
             AbsFragment.show(mFragmentManager, (Class<? extends AbsFragment>) cls,
-                    R.id.content_container, fragmentTag, null, builder.build());
+                    R.id.content_container, fragmentTag, argument, builder.build());
         }
     }
 

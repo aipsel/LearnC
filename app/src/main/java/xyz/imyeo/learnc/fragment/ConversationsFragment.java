@@ -25,6 +25,7 @@ import java.util.List;
 
 import xyz.imyeo.learnc.CommonActivity;
 import xyz.imyeo.learnc.R;
+import xyz.imyeo.learnc.core.DataPipe;
 import xyz.imyeo.learnc.model.Conversation;
 import xyz.imyeo.learnc.widget.CircleImageView;
 import xyz.imyeo.learnc.widget.FlowTagView;
@@ -83,7 +84,14 @@ public class ConversationsFragment extends AbsFragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(getActivity(), CommonActivity.class);
+        Bundle argument = new Bundle();
+        argument.putParcelable(DataPipe.ARG_KEY, new DataPipe().add("conversation", mData.get(position)));
+        intent.putExtra(CommonActivity.EXTRA_ARG, argument);
+        intent.putExtra(CommonActivity.EXTRA_CLASS, ConversationDetailFragment.class);
+        intent.putExtra(CommonActivity.EXTRA_TAG, ConversationDetailFragment.TAG);
+        intent.putExtra(CommonActivity.EXTRA_TITLE, ConversationDetailFragment.TITLE);
+        startActivity(intent);
     }
 
     @Override
