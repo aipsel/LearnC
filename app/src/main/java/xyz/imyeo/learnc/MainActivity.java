@@ -27,6 +27,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
     private static final String TAG = "MainActivity";
 
+    private static final int ACTION_LOGIN = 1;
+
     private FragmentManager mFragmentManager;
 
     private DrawerLayout mNavigationDrawer;
@@ -78,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
                     intent.putExtra(CommonActivity.EXTRA_CLASS, LoginFragment.class);
                     intent.putExtra(CommonActivity.EXTRA_TAG, LoginFragment.TAG);
                     intent.putExtra(CommonActivity.EXTRA_TITLE, LoginFragment.TITLE);
-                    startActivity(intent);
+                    startActivityForResult(intent, ACTION_LOGIN);
                 }
                 break;
             case R.id.drawer_menu_home:
@@ -121,6 +123,21 @@ public class MainActivity extends Activity implements View.OnClickListener,
             return true;
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case ACTION_LOGIN:
+                if (resultCode == RESULT_OK) {
+                    mToolbar.setTitle(R.string.drawer_user);
+                    AbsFragment.Flag.Builder builder = new AbsFragment.Flag.Builder();
+                    builder.singleton(true);
+                    AbsFragment.show(mFragmentManager, UserFragment.class, R.id.home_content,
+                            UserFragment.TAG, null, builder.build());
+                }
+                break;
+        }
     }
 
     private void initDrawer(Drawable userIcon, String userName) {

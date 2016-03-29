@@ -1,5 +1,6 @@
 package xyz.imyeo.learnc.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -54,13 +55,8 @@ public class LoginFragment extends AbsFragment implements View.OnClickListener {
                     @Override
                     public void done(ParseUser user, ParseException e) {
                         if (e == null && user != null) {
-                            //login success.
-                            Log.d(TAG, "done: "
-                                            + user.getSessionToken() + ", "
-                                            + user.getUsername() + ", "
-                                            + user.getObjectId() + ", "
-                                            + user.getCreatedAt() + ", "
-                            );
+                            getActivity().setResult(Activity.RESULT_OK);
+                            getActivity().finish();
                         } else if (user == null) {
                             // phone or password is not correct.
                             Log.d(TAG, "done: 手机号或密码输入有误！");
