@@ -77,6 +77,16 @@ public class Conversation extends ParseObject {
         return this;
     }
 
+    public Conversation addTags(List<CharSequence> tag) {
+        List<CharSequence> tags = getList("tags");
+        if (tags == null) {
+            put("tags", tag);
+        } else {
+            tags.addAll(tag);
+        }
+        return this;
+    }
+
     public void removeTag(CharSequence tag) {
         getList("tags").remove(tag);
     }

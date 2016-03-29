@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="主题： " />
+
+        <EditText
+            android:id="@+id/conversation_title_editor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请输入主题"
+            android:singleLine="true"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="分类： " />
+
+        <Spinner
+            android:id="@+id/conversation_type_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <xyz.imyeo.learnc.widget.FlowTagView
+        android:id="@+id/discussion_tag"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:ftv_tagBackground="@drawable/tag_background"
+        app:ftv_tagGap="4dp"
+        app:ftv_tagPadding="6dp"
+        app:ftv_tagTextSize="16sp" />
+
+    <EditText
+        android:id="@+id/conversation_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:hint="请输入内容" />
+
+</LinearLayout>

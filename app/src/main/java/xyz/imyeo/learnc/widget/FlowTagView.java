@@ -63,6 +63,15 @@ public class FlowTagView extends View {
         invalidate();
     }
 
+    public void addTag(CharSequence tag) {
+        mTags.add(0, tag);
+        invalidate();
+    }
+
+    public List<CharSequence> getTags() {
+        return mTags;
+    }
+
     private void setTagTextSize(float textSize) {
         mTextPaint.setTextSize(textSize);
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();

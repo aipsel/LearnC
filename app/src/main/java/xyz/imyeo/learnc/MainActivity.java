@@ -16,6 +16,7 @@ import android.widget.Toolbar;
 import com.parse.ParseUser;
 
 import xyz.imyeo.learnc.fragment.AbsFragment;
+import xyz.imyeo.learnc.fragment.ConversationsFragment;
 import xyz.imyeo.learnc.fragment.HomeFragment;
 import xyz.imyeo.learnc.fragment.LoginFragment;
 import xyz.imyeo.learnc.fragment.UserFragment;
@@ -90,6 +91,9 @@ public class MainActivity extends Activity implements View.OnClickListener,
             case R.id.drawer_menu_tutorial:
                 break;
             case R.id.drawer_menu_forum:
+                mToolbar.setTitle(R.string.drawer_forum);
+                AbsFragment.show(mFragmentManager, ConversationsFragment.class, R.id.home_content,
+                        ConversationsFragment.TAG, null, new AbsFragment.Flag.Builder().singleton(true).build());
                 break;
             case R.id.drawer_menu_self_test:
                 break;
