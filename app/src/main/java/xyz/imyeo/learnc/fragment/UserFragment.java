@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +139,7 @@ public class UserFragment extends AbsFragment implements View.OnClickListener, V
 
         private final int mType;
 
-        private final int mItemPerFetch = 10;
+        private final int mItemPerFetch = 20;
 
         private List<Conversation> mData = new ArrayList<>();
 
@@ -188,6 +189,7 @@ public class UserFragment extends AbsFragment implements View.OnClickListener, V
         private void fetchMore() {
             if (!mIsFetchedAll) {
                 ParseQuery.getQuery(Conversation.class)
+                        .whereEqualTo("creator", ParseUser.getCurrentUser())
                         .whereEqualTo("type", mType)
                         .setLimit(mItemPerFetch)
                         .setSkip(mData.size())
