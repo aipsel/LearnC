@@ -2,8 +2,10 @@ package xyz.imyeo.learnc.model;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ParseClassName("Conversation")
 public class Conversation extends ParseObject {
@@ -16,51 +18,66 @@ public class Conversation extends ParseObject {
         return getParseUser("creator");
     }
 
-    public void setCreator(ParseUser creator) {
+    public Conversation setCreator(ParseUser creator) {
         put("creator", creator);
+        return this;
     }
 
     public String getTitle() {
         return getString("title");
     }
 
-    public void setTitle(String mTitle) {
+    public Conversation setTitle(String mTitle) {
         put("title", mTitle);
+        return this;
     }
 
     public String getDescription() {
         return getString("description");
     }
 
-    public void setDescription(String description) {
+    public Conversation setDescription(String description) {
         put("description", description);
+        return this;
     }
 
     public int getType() {
         return getInt("type");
     }
 
-    public void setType(int type) {
+    public Conversation setType(int type) {
         put("type", type);
+        return this;
     }
 
     public int getViews() {
         return getInt("views");
     }
 
-    public void setViews(int views) {
+    public Conversation setViews(int views) {
         put("views", views);
+        return this;
     }
 
-    public ParseRelation<Comment> getComment() {
-        return getRelation("comments");
+    public int getCommentNumber() {
+        return getInt("commentNumber");
     }
 
-    public void addComment(Comment comment) {
-        getRelation("comments").add(comment);
+    public List<CharSequence> getTags() {
+        return getList("tags");
     }
 
-    public void deleteComment(Comment comment) {
-        getRelation("comments").remove(comment);
+    public Conversation addTag(CharSequence tag) {
+        List<CharSequence> tags = getList("tags");
+        if (tags == null) {
+            tags = new ArrayList<>();
+            put("tags", tags);
+        }
+        tags.add(tag);
+        return this;
+    }
+
+    public void removeTag(CharSequence tag) {
+        getList("tags").remove(tag);
     }
 }

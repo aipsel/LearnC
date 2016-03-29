@@ -1,10 +1,10 @@
 package xyz.imyeo.learnc.model;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import java.util.List;
-
+@ParseClassName("Comment")
 public class Comment extends ParseObject {
 
     public ParseUser getCreator() {
@@ -21,17 +21,5 @@ public class Comment extends ParseObject {
 
     public void setContent(String content) {
         put("content", content);
-    }
-
-    public List<String> getTags() {
-        return getList("tags");
-    }
-
-    public void addTags(String tag) {
-        getList("tags").add(tag);
-    }
-
-    public void removeTags(String tag) {
-        getList("tags").remove(tag);
     }
 }

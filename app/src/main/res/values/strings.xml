@@ -11,4 +11,10 @@
     <string name="drawer_self_test">自我评测</string>
     <string name="drawer_setting">设置</string>
     <string name="drawer_about">关于</string>
+
+    <string-array name="conversation_type">
+        <item>提问</item>
+        <item>分享</item>
+        <item>讨论</item>
+    </string-array>
 </resources>

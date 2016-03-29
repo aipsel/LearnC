@@ -58,7 +58,7 @@ public class FlowTagView extends View {
         mTags = new ArrayList<>();
     }
 
-    public void setTag(List<CharSequence> tags) {
+    public void setTags(List<CharSequence> tags) {
         mTags = tags;
         invalidate();
     }
