@@ -3,6 +3,7 @@ package xyz.imyeo.learnc.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,13 +29,18 @@ import xyz.imyeo.learnc.model.Conversation;
 import xyz.imyeo.learnc.widget.CircleImageView;
 import xyz.imyeo.learnc.widget.FlowTagView;
 
-public class ConversationsFragment extends AbsFragment implements AdapterView.OnItemClickListener {
+public class ConversationsFragment extends AbsFragment implements AdapterView.OnItemClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TAG = "Fragment.Conversations";
 
     public static final String TITLE = "论坛";
 
     private List<Conversation> mData = new ArrayList<>();
+
+    private ListViewAdapter mListViewAdapter;
+
+    private SwipeRefreshLayout mRefreshLayout;
 
     @Override
     public String getTitle() {
@@ -46,8 +52,11 @@ public class ConversationsFragment extends AbsFragment implements AdapterView.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_conversations, container, false);
         ListView listView = (ListView) view.findViewById(R.id.list_view);
-        listView.setAdapter(new ListViewAdapter(inflater));
+        mListViewAdapter = new ListViewAdapter(inflater);
+        listView.setAdapter(mListViewAdapter);
         listView.setOnItemClickListener(this);
+        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
+        mRefreshLayout.setOnRefreshListener(this);
         setHasOptionsMenu(true);
         return view;
     }
@@ -75,6 +84,13 @@ public class ConversationsFragment extends AbsFragment implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        mData.clear();
+        mListViewAdapter.notifyDataSetChanged();
+        mListViewAdapter.fetchMore();
     }
 
     private final class ListViewAdapter extends BaseAdapter {
@@ -121,9 +137,16 @@ public class ConversationsFragment extends AbsFragment implements AdapterView.On
             holder.totalComments.setText(String.valueOf(c.getCommentNumber()));
             holder.totalViews.setText(String.valueOf(c.getViews()));
             if (position + 1 == getCount()) {
+                Log.d(TAG, "getView: fetch next page: " + position);
                 fetchMore();
             }
             return convertView;
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+            mIsFetchedAll = false;
         }
 
         private void fetchMore() {
@@ -137,11 +160,12 @@ public class ConversationsFragment extends AbsFragment implements AdapterView.On
                                 if (e != null) {
                                     Log.e(TAG, "[done] error:" + e.getCode() + "," + e.getMessage());
                                 } else {
+                                    mData.addAll(result);
+                                    notifyDataSetChanged();
+                                    mRefreshLayout.setRefreshing(false);
                                     if (result.size() < mItemPerFetch) {
                                         mIsFetchedAll = true;
                                     }
-                                    mData.addAll(result);
-                                    notifyDataSetChanged();
                                 }
                             }
                         });
