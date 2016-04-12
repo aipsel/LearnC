@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <xyz.imyeo.learnc.widget.GoodScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        android:id="@id/vertical_scroll"
+        android:background="#3fff">
+
+        <HorizontalScrollView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="horizontal"
+            android:fillViewport="true"
+            android:id="@id/horizontal_scroll"
+            android:background="@null">
+
+            <xyz.imyeo.learnc.widget.CodeEditor
+                android:id="@id/editor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:bufferType="spannable"
+                android:textCursorDrawable="@null"
+                android:cursorVisible="true"
+                android:gravity="top|start"
+                android:singleLine="false"
+                android:background="@null"
+                android:text=""
+                android:textIsSelectable="true" />
+        </HorizontalScrollView>
+    </xyz.imyeo.learnc.widget.GoodScrollView>
+</LinearLayout>

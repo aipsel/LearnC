@@ -4,4 +4,17 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPrimaryLight">#4d7fec</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- From Turbo editor. -->
+    <color name="file_text">#717171</color>
+    <color name="textColor">#ffffffff</color> <!-- ff191919 -->
+    <color name="textColorInverted">#ff212121</color> <!-- ff191919 -->
+
+    <color name="syntax_number">#ffff6600</color>
+    <color name="syntax_keyword">#ff2f6f9f</color>
+    <color name="syntax_attr">#ff4f9fcf</color>
+    <color name="syntax_attr_value">#ffd44950</color>
+    <color name="syntax_string">#ffd44950</color>
+    <color name="syntax_variable">#ff009688</color>
+    <color name="syntax_comment">#ff999999</color>
 </resources>

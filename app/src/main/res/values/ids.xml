@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- menu item ids -->
+    <item type="id" name="im_undo" />
+    <item type="id" name="im_redo" />
+
+    <!-- layout item ids -->
+    <item type="id" name="editor" />
+    <item type="id" name="vertical_scroll" />
+    <item type="id" name="horizontal_scroll" />
+</resources>

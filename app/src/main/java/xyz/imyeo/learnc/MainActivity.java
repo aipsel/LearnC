@@ -10,20 +10,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.parse.ParseUser;
 
+import xyz.imyeo.learnc.core.PreferenceHelper;
+import xyz.imyeo.learnc.editor.PageSystem;
 import xyz.imyeo.learnc.fragment.AbsFragment;
 import xyz.imyeo.learnc.fragment.ConversationsFragment;
 import xyz.imyeo.learnc.fragment.HomeFragment;
 import xyz.imyeo.learnc.fragment.LoginFragment;
 import xyz.imyeo.learnc.fragment.UserFragment;
 import xyz.imyeo.learnc.widget.CircleImageView;
+import xyz.imyeo.learnc.widget.CodeEditor;
+import xyz.imyeo.learnc.widget.GoodScrollView;
 
 public class MainActivity extends Activity implements View.OnClickListener,
-        AbsFragment.AbsFragmentListener {
+        AbsFragment.AbsFragmentListener, GoodScrollView.ScrollInterface,PageSystem.PageSystemInterface {
 
     private static final String TAG = "MainActivity";
 
@@ -34,6 +39,11 @@ public class MainActivity extends Activity implements View.OnClickListener,
     private DrawerLayout mNavigationDrawer;
 
     private Toolbar mToolbar;
+
+    private GoodScrollView verticalScroll;
+    private CodeEditor mEditor;
+    private HorizontalScrollView horizontalScroll;
+    private PageSystem pageSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,8 @@ public class MainActivity extends Activity implements View.OnClickListener,
         AbsFragment.show(mFragmentManager, HomeFragment.class, R.id.home_content,
                 HomeFragment.TAG, null, builder.build());
         mToolbar.setTitle(R.string.drawer_home);
+
+        setupTextEditor();
     }
 
     @Override
@@ -138,6 +150,58 @@ public class MainActivity extends Activity implements View.OnClickListener,
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onPageChanged(int page) {
+//        pageSystemButtons.updateVisibility(false);
+//        searchResult = null;
+        mEditor.clearHistory();
+//        invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onScrollChanged(int l, int t, int oldl, int oldt) {
+//        pageSystemButtons.updateVisibility(Math.abs(t) > 10);
+//
+//        if (!PreferenceHelper.getSyntaxHighlight(this) || (mEditor.hasSelection() &&
+//                searchResult == null) || updateHandler == null || colorRunnable_duringScroll == null)
+//            return;
+//
+//        updateHandler.removeCallbacks(colorRunnable_duringEditing);
+//        updateHandler.removeCallbacks(colorRunnable_duringScroll);
+//        updateHandler.postDelayed(colorRunnable_duringScroll, SYNTAX_DELAY_MILLIS_SHORT);
+    }
+
+    private void setupTextEditor() {
+
+        verticalScroll = (GoodScrollView) findViewById(R.id.vertical_scroll);
+        horizontalScroll = (HorizontalScrollView) findViewById(R.id.horizontal_scroll);
+        mEditor = (CodeEditor) findViewById(R.id.editor);
+
+//        AccessoryView accessoryView = (AccessoryView) findViewById(R.id.accessoryView);
+//        accessoryView.setInterface(this);
+
+//        HorizontalScrollView parentAccessoryView = (HorizontalScrollView) view.findViewById(R.id.parent_accessory_view);
+//        ViewUtils.setVisible(parentAccessoryView, PreferenceHelper.getUseAccessoryView(this));
+
+
+        if (PreferenceHelper.getWrapContent(this)) {
+            horizontalScroll.removeView(mEditor);
+            verticalScroll.removeView(horizontalScroll);
+            verticalScroll.addView(mEditor);
+        }
+
+//        verticalScroll.setScrollInterface(this);
+
+        pageSystem = new PageSystem(this, this, "");
+
+//        pageSystemButtons = new PageSystemButtons(this, this,
+//                (FloatingActionButton) findViewById(R.id.fabPrev),
+//                (FloatingActionButton) findViewById(R.id.fabNext));
+
+        mEditor.setupEditor(verticalScroll, pageSystem);
+        mEditor.replaceTextKeepCursor("int main() {\n    printf(\"hello!\\n\");\n}");
     }
 
     private void initDrawer(Drawable userIcon, String userName) {
